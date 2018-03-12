@@ -1,0 +1,45 @@
+Description: Fix use of fprintf
+Author: Sascha Steinbiss <satta@debian.org>
+--- a/zlibWrapper/Makefile
++++ b/zlibWrapper/Makefile
+@@ -13,7 +13,7 @@ ZLIB_PATH ?= .
+ ZSTDLIBDIR = ../lib
+ ZSTDLIBRARY = $(ZSTDLIBDIR)/libzstd.a
+ ZLIBWRAPPER_PATH = .
+-GZFILES = gzclose.o gzlib.o gzread.o gzwrite.o
++#GZFILES = gzclose.o gzlib.o gzread.o gzwrite.o
+ EXAMPLE_PATH = examples
+ PROGRAMS_PATH = ../programs
+ TEST_FILE = ../doc/zstd_compression_format.md
+@@ -70,16 +70,16 @@ valgrindTest: clean example fitblk examp
+ #.c.o:
+ #	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+ 
+-minigzip: $(EXAMPLE_PATH)/minigzip.o $(ZLIBWRAPPER_PATH)/zstd_zlibwrapper.o $(GZFILES) $(ZSTDLIBRARY)
++minigzip: $(EXAMPLE_PATH)/minigzip.o $(ZLIBWRAPPER_PATH)/zstd_zlibwrapper.o $(ZSTDLIBRARY)
+ 	$(CC) $(LDFLAGS) $^ $(ZSTDLIBRARY) $(ZLIB_LIBRARY) -o $@
+ 
+-minigzip_zstd: $(EXAMPLE_PATH)/minigzip.o $(ZLIBWRAPPER_PATH)/zstdTurnedOn_zlibwrapper.o $(GZFILES) $(ZSTDLIBRARY)
++minigzip_zstd: $(EXAMPLE_PATH)/minigzip.o $(ZLIBWRAPPER_PATH)/zstdTurnedOn_zlibwrapper.o $(ZSTDLIBRARY)
+ 	$(CC) $(LDFLAGS) $^ $(ZSTDLIBRARY) $(ZLIB_LIBRARY) -o $@
+ 
+-example: $(EXAMPLE_PATH)/example.o $(ZLIBWRAPPER_PATH)/zstd_zlibwrapper.o $(GZFILES) $(ZSTDLIBRARY)
++example: $(EXAMPLE_PATH)/example.o $(ZLIBWRAPPER_PATH)/zstd_zlibwrapper.o $(ZSTDLIBRARY)
+ 	$(CC) $(LDFLAGS) $^ $(ZLIB_LIBRARY) -o $@
+ 
+-example_zstd: $(EXAMPLE_PATH)/example.o $(ZLIBWRAPPER_PATH)/zstdTurnedOn_zlibwrapper.o $(GZFILES) $(ZSTDLIBRARY)
++example_zstd: $(EXAMPLE_PATH)/example.o $(ZLIBWRAPPER_PATH)/zstdTurnedOn_zlibwrapper.o $(ZSTDLIBRARY)
+ 	$(CC) $(LDFLAGS) $^ $(ZLIB_LIBRARY) -o $@
+ 
+ fitblk: $(EXAMPLE_PATH)/fitblk.o $(ZLIBWRAPPER_PATH)/zstd_zlibwrapper.o $(ZSTDLIBRARY)
+--- a/zlibWrapper/examples/example.c
++++ b/zlibWrapper/examples/example.c
+@@ -27,7 +27,7 @@
+ 
+ /* @(#) $Id$ */
+ 
+-#include "zstd_zlibwrapper.h"
++#include "zlib.h"
+ #include <stdio.h>
+ 
+ #ifdef STDC

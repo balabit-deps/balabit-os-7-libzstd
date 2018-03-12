@@ -1,0 +1,24 @@
+Description: Fix typo in zstd man page s/minumum/minimum/
+From: Alex Mestiashvili <mailatgoogl@gmail.com>
+--- libzstd.orig/programs/zstd.1.md
++++ libzstd/programs/zstd.1.md
+@@ -367,7 +367,7 @@
+ 
+     Larger/very small values usually decrease compression ratio.
+ 
+-    The minumum _ldmslen_ is 4 and the maximum is 4096 (default: 64).
++    The minimum _ldmslen_ is 4 and the maximum is 4096 (default: 64).
+ 
+ - `ldmBucketSizeLog`=_ldmblog_, `ldmblog`=_ldmblog_:
+     Specify the size of each bucket for the hash table used for long distance
+--- libzstd.orig/programs/zstd.1
++++ libzstd/programs/zstd.1
+@@ -370,7 +370,7 @@
+ Larger/very small values usually decrease compression ratio\.
+ .
+ .IP
+-The minumum \fIldmslen\fR is 4 and the maximum is 4096 (default: 64)\.
++The minimum \fIldmslen\fR is 4 and the maximum is 4096 (default: 64)\.
+ .
+ .TP
+ \fBldmBucketSizeLog\fR=\fIldmblog\fR, \fBldmblog\fR=\fIldmblog\fR

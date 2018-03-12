@@ -1,0 +1,29 @@
+Description: Skip too heavy md5sum test on GNU HURD.
+ Do not pass -T parameter to test tools as they never finish on HURD
+From: Alex Mestiashvili <mailatgoogl@gmail.com>
+Forwarded-Upstream: yes (https://github.com/facebook/zstd/issues/935)
+Last-Update: 2017-11-30
+
+--- libzstd.orig/tests/playTests.sh
++++ libzstd/tests/playTests.sh
+@@ -713,7 +713,10 @@
+ 
+ roundTripTest -g5000000000 -P99 1
+ 
++DEBIAN_ARCH=$(dpkg-architecture -qDEB_HOST_ARCH_OS)
++if [ "$DEBIAN_ARCH" != "hurd" ]; then
+ fileRoundTripTest -g4193M -P99 1
++fi
+ 
+ 
+ $ECHO "\n===>   zstd long, long distance matching round-trip tests "
+@@ -732,7 +735,9 @@
+     roundTripTest -g80000000 -P99 "19 -T2" " "
+     roundTripTest -g5000000000 -P99 "1 -T2" " "
+     roundTripTest -g500000000 -P97 "1 -T999" " "
++    if [ "$DEBIAN_ARCH" != "hurd" ]; then
+     fileRoundTripTest -g4103M -P98 " -T0" " "
++    fi
+     roundTripTest -g400000000 -P97 "1 --long=24 -T2" " "
+ else
+     $ECHO "\n**** no multithreading, skipping zstdmt tests **** "

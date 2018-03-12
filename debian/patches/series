@@ -1,0 +1,7 @@
+0003-Add-symlinks-for-extra-manpages.patch
+0004-Add-help2man-d-pzstd-man-file.patch
+0006-Use-bash-for-test-script-portablitity.patch
+0008-Address-embedded-zlib.patch
+0009-Add-shebang-for-scripts.patch
+0011-skip-long-running-tests_on_hurd.patch
+0012-typos.patch

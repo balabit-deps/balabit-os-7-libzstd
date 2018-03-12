@@ -1,0 +1,35 @@
+#!/usr/bin/make -f
+
+export DH_VERBOSE=1
+
+DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
+export DEB_BUILD_MAINT_OPTIONS=hardening=+all
+
+# Upstream's makefiles will respect PREFIX, and this means we avoid a patch
+export PREFIX=/usr
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	dh_auto_build
+	$(MAKE) -C contrib/pzstd/ pzstd
+
+override_dh_install:
+	# Call d-shlibmove to comply with library packaging guide
+	d-shlibmove --commit \
+				--multiarch \
+				--devunversioned \
+				--exclude-la \
+				--movedev "debian/tmp/usr/include/*" usr/include \
+				--movedev "debian/tmp/usr/lib/pkgconfig/*" usr/lib/$(DEB_HOST_MULTIARCH)/pkgconfig \
+				debian/tmp/usr/lib/lib*.so
+	cp -r debian/libzstd1/usr debian/libzstd1-udeb/
+	dh_install
+
+override_dh_makeshlibs:
+	dh_makeshlibs -plibzstd1 --add-udeb=libzstd1-udeb
+
+override_dh_auto_clean:
+	dh_auto_clean
+	$(MAKE) -C contrib/pzstd clean

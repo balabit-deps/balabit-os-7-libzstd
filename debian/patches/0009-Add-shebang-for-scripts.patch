@@ -1,0 +1,9 @@
+Description: add shebang line to new script
+Author: Sascha Steinbiss <satta@debian.org>
+--- a/programs/zstdless
++++ b/programs/zstdless
+@@ -1,2 +1,4 @@
+ #!/bin/sh
++
++#!/bin/sh
+ zstdcat "$@" | less

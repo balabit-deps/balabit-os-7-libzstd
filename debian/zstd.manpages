@@ -1,0 +1,2 @@
+contrib/pzstd/*.1
+programs/*zstd*.1
