@@ -1,3 +1,13 @@
+libzstd (1.3.3+dfsg-2ubuntu1.1) bionic-security; urgency=medium
+
+  [ Eduardo Barretto ]
+  * SECURITY UPDATE: Race condition in the one-pass compression functions could
+    allow an attacker to write bytes out of bounds.
+    - debian/patches/CVE-2019-11922.patch: Fix race condition.
+    - CVE-2019-11922
+
+ -- Leonidas S. Barbosa <leo.barbosa@canonical.com>  Tue, 20 Aug 2019 15:19:17 -0300
+
 libzstd (1.3.3+dfsg-2ubuntu1) bionic; urgency=medium
 
   * Merge from Debian Unstable New queue / Vcs-Git, remaining changes:

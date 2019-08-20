@@ -5,3 +5,4 @@
 0009-Add-shebang-for-scripts.patch
 0011-skip-long-running-tests_on_hurd.patch
 0012-typos.patch
+CVE-2019-11922.patch
