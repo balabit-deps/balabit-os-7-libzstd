@@ -1,3 +1,14 @@
+libzstd (1.3.3+dfsg-2ubuntu1.2) bionic-security; urgency=medium
+
+  * SECURITY UPDATE: race condition allows attacker to access
+    world-readable destination file
+    - debian/patches/0017-fix-file-permissions-on-compression.patch: set
+      umask in programs/fileio.c, programs/util.h.
+    - CVE-2021-24031
+    - CVE-2021-24032
+
+ -- Marc Deslauriers <marc.deslauriers@ubuntu.com>  Wed, 03 Mar 2021 10:51:37 -0500
+
 libzstd (1.3.3+dfsg-2ubuntu1.1) bionic-security; urgency=medium
 
   [ Eduardo Barretto ]

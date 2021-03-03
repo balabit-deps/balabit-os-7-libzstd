@@ -6,3 +6,4 @@
 0011-skip-long-running-tests_on_hurd.patch
 0012-typos.patch
 CVE-2019-11922.patch
+0017-fix-file-permissions-on-compression.patch
